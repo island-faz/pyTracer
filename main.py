@@ -10,7 +10,7 @@ def normalize(v):
     return v / norm
 
 def rs_intersect(R0, d, C, r):
-    q = R0 - C
+    R0 = R0 - C
     dDotR0 = np.dot(d, R0)
     delta = (dDotR0*dDotR0 - np.dot(R0, R0) + r*r)
     if delta >= 0 :
@@ -35,7 +35,7 @@ phi = math.pi / 4 # FOV VERTICAL
 u_vector = (d * math.tan(theta))  * x
 v_vector = (d * math.tan(phi))    * y
 
-sphere_o = np.array([0, 0, 1])
+sphere_o = np.array([0, 0, 10])
 
 for i in range(frameWidth):
     for j in range(frameHeight):
@@ -44,7 +44,7 @@ for i in range(frameWidth):
 
         VecDir = (alpha * u_vector + beta * v_vector) - cam_o # vecteur directeur du rayon
 
-        d = rs_intersect(cam_o, normalize(VecDir), sphere_o, 1)
+        d = rs_intersect(cam_o, normalize(VecDir), sphere_o, 5)
 
         if d != None :
             data[i, j] = [255, 0, 0]
